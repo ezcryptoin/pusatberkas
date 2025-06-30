@@ -26,40 +26,80 @@
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
+        .lang-btn.active {
+            outline: 2px solid #3b82f6;
+            transform: scale(1.1);
+        }
     </style>
 </head>
 <body class="bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-gray-200 font-sans">
 
     <!-- Halaman Otentikasi -->
-    <div id="auth-page" class="flex items-center justify-center min-h-screen">
+    <div id="auth-page" class="flex items-center justify-center min-h-screen py-12">
         <div class="w-full max-w-md p-8 space-y-6 bg-white dark:bg-gray-800 rounded-2xl shadow-2xl">
+            <!-- Form Login -->
             <form id="login-form" class="space-y-6">
-                <h2 class="text-3xl font-bold text-center">Login</h2>
+                <h2 class="text-3xl font-bold text-center" data-translate-key="loginTitle">Login</h2>
                 <div>
-                    <label for="login-email" class="text-sm font-medium">Alamat Email</label>
+                    <label for="login-email" class="text-sm font-medium" data-translate-key="emailLabel">Alamat Email</label>
                     <input id="login-email" type="email" required class="mt-1 block w-full px-3 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
                 </div>
                 <div>
-                    <label for="login-password" class="text-sm font-medium">Password</label>
+                    <label for="login-password" class="text-sm font-medium" data-translate-key="passwordLabel">Password</label>
                     <input id="login-password" type="password" required class="mt-1 block w-full px-3 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
                 </div>
                 <p id="login-error" class="text-sm text-red-500"></p>
-                <button type="submit" class="w-full flex justify-center py-2 px-4 border rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700">Masuk</button>
-                <p class="text-sm text-center">Belum punya akun? <a href="#" id="show-signup" class="font-medium text-blue-600 hover:text-blue-500">Buat akun</a></p>
+                <button type="submit" class="w-full flex justify-center py-2 px-4 border rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700" data-translate-key="loginButton">Masuk</button>
+                <p class="text-sm text-center">
+                    <span data-translate-key="noAccount">Belum punya akun?</span>
+                    <a href="#" id="show-signup" class="font-medium text-blue-600 hover:text-blue-500" data-translate-key="createAccountLink">Buat akun</a>
+                </p>
             </form>
-            <form id="signup-form" class="hidden space-y-6">
-                <h2 class="text-3xl font-bold text-center">Buat Akun Baru</h2>
-                <div>
-                    <label for="signup-email" class="text-sm font-medium">Alamat Email</label>
-                    <input id="signup-email" type="email" required class="mt-1 block w-full px-3 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+            <!-- Form Buat Akun dengan Kolom Baru -->
+            <form id="signup-form" class="hidden space-y-4">
+                <h2 class="text-3xl font-bold text-center" data-translate-key="signupTitle">Buat Akun Baru</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label for="signup-firstname" class="text-sm font-medium" data-translate-key="firstNameLabel">Nama Depan</label>
+                        <input id="signup-firstname" type="text" required class="mt-1 block w-full px-3 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm">
+                    </div>
+                    <div>
+                        <label for="signup-lastname" class="text-sm font-medium" data-translate-key="lastNameLabel">Nama Belakang</label>
+                        <input id="signup-lastname" type="text" required class="mt-1 block w-full px-3 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm">
+                    </div>
                 </div>
                 <div>
-                    <label for="signup-password" class="text-sm font-medium">Password</label>
-                    <input id="signup-password" type="password" required class="mt-1 block w-full px-3 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                    <label for="signup-email" class="text-sm font-medium" data-translate-key="emailLabel">Alamat Email</label>
+                    <input id="signup-email" type="email" required class="mt-1 block w-full px-3 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm">
+                </div>
+                <div>
+                    <label for="signup-password" class="text-sm font-medium" data-translate-key="passwordLabel">Password</label>
+                    <input id="signup-password" type="password" required class="mt-1 block w-full px-3 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm">
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label for="signup-gender" class="text-sm font-medium" data-translate-key="genderLabel">Jenis Kelamin</label>
+                        <select id="signup-gender" required class="mt-1 block w-full px-3 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm">
+                            <option value="" data-translate-key="genderSelect">Pilih...</option>
+                            <option value="pria" data-translate-key="genderMale">Pria</option>
+                            <option value="wanita" data-translate-key="genderFemale">Wanita</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="signup-dob" class="text-sm font-medium" data-translate-key="dobLabel">Tgl. Lahir</label>
+                        <input id="signup-dob" type="date" required class="mt-1 block w-full px-3 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm">
+                    </div>
+                </div>
+                <div class="flex items-center">
+                    <input id="signup-age-check" type="checkbox" required class="h-4 w-4 text-blue-600 border-gray-300 rounded">
+                    <label for="signup-age-check" class="ml-2 block text-sm" data-translate-key="ageRequirement">Saya sudah memenuhi syarat 18+</label>
                 </div>
                 <p id="signup-error" class="text-sm text-red-500"></p>
-                <button type="submit" class="w-full flex justify-center py-2 px-4 border rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700">Daftar</button>
-                <p class="text-sm text-center">Sudah punya akun? <a href="#" id="show-login" class="font-medium text-blue-600 hover:text-blue-500">Login</a></p>
+                <button type="submit" class="w-full flex justify-center py-2 px-4 border rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700" data-translate-key="signupButton">Daftar</button>
+                <p class="text-sm text-center">
+                    <span data-translate-key="haveAccount">Sudah punya akun?</span>
+                    <a href="#" id="show-login" class="font-medium text-blue-600 hover:text-blue-500" data-translate-key="loginLink">Login</a>
+                </p>
             </form>
         </div>
     </div>
@@ -68,62 +108,69 @@
     <div id="explorer-page" class="hidden">
         <div class="container mx-auto p-4 sm:p-6 lg:p-8 max-w-7xl">
             <div id="action-banner" class="hidden fixed top-0 left-1/2 -translate-x-1/2 w-11/12 max-w-2xl bg-blue-600 text-white p-4 rounded-b-lg shadow-lg z-50 text-center">
-                <span id="action-banner-text"></span><button id="cancel-action-btn" class="ml-4 font-bold hover:underline">Batal</button>
+                <span id="action-banner-text"></span><button id="cancel-action-btn" class="ml-4 font-bold hover:underline" data-translate-key="cancelButton">Batal</button>
             </div>
             <div id="upload-progress-banner" class="hidden fixed bottom-4 right-4 bg-gray-800 text-white p-4 rounded-lg shadow-lg z-50 flex items-center space-x-3">
-                <div class="spinner"></div><span id="upload-progress-text">Mengunggah file...</span>
+                <div class="spinner"></div><span id="upload-progress-text"></span>
             </div>
             <div class="bg-white dark:bg-gray-800 rounded-xl shadow-2xl overflow-hidden">
                 <header class="p-4 flex justify-between items-center border-b border-gray-200 dark:border-gray-700">
-                    <div class="flex items-center gap-3">
-                        <!-- Logo dari URL Pengguna -->
-                        <img src="https://i.ibb.co/CKMYf44/Screenshot-2024-07-01-005139.png" alt="Logo Pusat Berkas" class="w-10 h-10 rounded-md object-cover">
-                        <!-- AKHIR LOGO -->
+                    <!-- Sisi Kiri Header -->
+                    <div class="flex items-center gap-4">
+                        <!-- Language Switcher (Dipindahkan dan Diperbaiki) -->
+                        <div class="flex gap-2">
+                            <button id="lang-id" class="lang-btn p-1 rounded-full transition-transform duration-200">🇮🇩</button>
+                            <button id="lang-en" class="lang-btn p-1 rounded-full transition-transform duration-200">🇬🇧</button>
+                        </div>
+                        <img src="https://i.ibb.co/3k7pW0c/Screenshot-2024-07-01-005139.png" alt="Logo Pusat Berkas" class="w-10 h-10 rounded-md object-cover">
                         <div>
-                            <h1 class="text-2xl font-bold">Pusat Berkas</h1>
+                            <h1 class="text-2xl font-bold" data-translate-key="mainTitle">Pusat Berkas</h1>
                             <p id="user-email" class="text-xs text-gray-500"></p>
                         </div>
                     </div>
-                    <button id="logout-button" class="px-4 py-2 bg-red-600 text-white rounded-lg shadow hover:bg-red-700">Logout</button>
+                    <!-- Sisi Kanan Header -->
+                    <div class="flex items-center">
+                        <button id="logout-button" class="px-4 py-2 bg-red-600 text-white rounded-lg shadow hover:bg-red-700" data-translate-key="logoutButton">Logout</button>
+                    </div>
                 </header>
                 <div class="p-4 flex flex-wrap gap-4 items-center justify-between bg-gray-50 dark:bg-gray-700/50 border-b border-gray-200 dark:border-gray-700">
                     <div class="flex gap-2 flex-wrap">
-                        <button id="up-button" class="px-4 py-2 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700 disabled:bg-gray-400">Naik</button>
-                        <button id="create-folder-button" class="px-4 py-2 bg-indigo-600 text-white rounded-lg shadow hover:bg-indigo-700">Buat Folder</button>
-                        <button id="upload-button" class="px-4 py-2 bg-green-600 text-white rounded-lg shadow hover:bg-green-700">Unggah File</button>
+                        <button id="up-button" class="px-4 py-2 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700 disabled:bg-gray-400" data-translate-key="upButton">Naik</button>
+                        <button id="create-folder-button" class="px-4 py-2 bg-indigo-600 text-white rounded-lg shadow hover:bg-indigo-700" data-translate-key="createFolderButton">Buat Folder</button>
+                        <button id="upload-button" class="px-4 py-2 bg-green-600 text-white rounded-lg shadow hover:bg-green-700" data-translate-key="uploadButton">Unggah File</button>
                         <input type="file" id="file-input" class="hidden" multiple>
                     </div>
                     <div class="relative">
-                        <input type="search" id="search-input" placeholder="Cari file..." class="pl-8 pr-4 py-2 border rounded-lg dark:bg-gray-800 dark:border-gray-600 w-full sm:w-auto">
+                        <input type="search" id="search-input" class="pl-8 pr-4 py-2 border rounded-lg dark:bg-gray-800 dark:border-gray-600 w-full sm:w-auto" data-translate-key="searchPlaceholder">
                         <svg class="w-5 h-5 absolute left-2 top-1/2 -translate-y-1/2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
                     </div>
                 </div>
                 <div class="p-4 flex items-center border-b border-gray-200 dark:border-gray-700">
-                    <span class="text-sm font-medium mr-2">Path:</span>
+                    <span class="text-sm font-medium mr-2" data-translate-key="pathLabel">Path:</span>
                     <div id="breadcrumbs" class="text-sm text-gray-600 dark:text-gray-300 truncate"></div>
                 </div>
                 <div id="file-list-container" class="p-4 h-[60vh] overflow-y-auto relative">
-                    <div id="loading" class="hidden text-center py-10"><p>Memuat...</p></div>
+                    <div id="loading" class="hidden text-center py-10"><p data-translate-key="loadingText">Memuat...</p></div>
                     <div id="file-list" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4"></div>
-                    <div id="empty-message" class="hidden text-center py-10"><p>Folder ini kosong.</p></div>
+                    <div id="empty-message" class="hidden text-center py-10"><p data-translate-key="emptyFolderText">Folder ini kosong.</p></div>
                 </div>
             </div>
         </div>
     </div>
 
     <!-- Menu Konteks -->
-    <div id="context-menu" class="hidden absolute z-10 w-40 bg-white dark:bg-gray-700 rounded-md shadow-lg border dark:border-gray-600 opacity-0">
-        <a id="ctx-open" href="#" target="_blank" class="block px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-600">Buka</a>
-        <button id="ctx-copy" class="w-full text-left block px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-600">Salin ke...</button>
-        <button id="ctx-move" class="w-full text-left block px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-600">Pindahkan ke...</button>
+    <div id="context-menu" class="hidden absolute z-30 w-40 bg-white dark:bg-gray-700 rounded-md shadow-lg border dark:border-gray-600 opacity-0">
+        <a id="ctx-open" href="#" target="_blank" class="block px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-600" data-translate-key="ctxOpen">Buka</a>
+        <button id="ctx-copy" class="w-full text-left block px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-600" data-translate-key="ctxCopy">Salin ke...</button>
+        <button id="ctx-move" class="w-full text-left block px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-600" data-translate-key="ctxMove">Pindahkan ke...</button>
         <div class="border-t my-1"></div>
-        <button id="ctx-delete" class="w-full text-left block px-4 py-2 text-sm text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/50">Hapus</button>
+        <button id="ctx-delete" class="w-full text-left block px-4 py-2 text-sm text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/50" data-translate-key="ctxDelete">Hapus</button>
     </div>
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-app.js";
         import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-auth.js";
-        import { getFirestore, collection, addDoc, query, where, onSnapshot, doc, deleteDoc, updateDoc } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-firestore.js";
+        import { getFirestore, collection, addDoc, query, where, onSnapshot, doc, deleteDoc, updateDoc, setDoc } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-firestore.js";
         import { getStorage, ref, uploadBytes, getDownloadURL, deleteObject } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-storage.js";
 
         const firebaseConfig = {
@@ -141,6 +188,126 @@
         const db = getFirestore(app);
         const storage = getStorage(app);
 
+        // --- TRANSLATION LOGIC ---
+        const translations = {
+            en: {
+                loginTitle: "Login",
+                emailLabel: "Email Address",
+                passwordLabel: "Password",
+                loginButton: "Sign In",
+                noAccount: "Don't have an account?",
+                createAccountLink: "Create one",
+                signupTitle: "Create New Account",
+                firstNameLabel: "First Name",
+                lastNameLabel: "Last Name",
+                genderLabel: "Gender",
+                genderSelect: "Select...",
+                genderMale: "Male",
+                genderFemale: "Female",
+                dobLabel: "Date of Birth",
+                ageRequirement: "I am 18+ years old",
+                signupButton: "Sign Up",
+                haveAccount: "Already have an account?",
+                loginLink: "Login",
+                mainTitle: "File Hub",
+                logoutButton: "Logout",
+                upButton: "Up",
+                createFolderButton: "New Folder",
+                uploadButton: "Upload File",
+                searchPlaceholder: "Search files...",
+                pathLabel: "Path:",
+                loadingText: "Loading...",
+                emptyFolderText: "This folder is empty.",
+                ctxOpen: "Open",
+                ctxCopy: "Copy to...",
+                ctxMove: "Move to...",
+                ctxDelete: "Delete",
+                cancelButton: "Cancel",
+                errorWrongPassword: "Wrong email or password.",
+                errorEmailInUse: "This email is already registered.",
+                errorWeakPassword: "Password is too weak (min. 6 characters).",
+                errorGeneric: "An error occurred. Please try again.",
+                uploadingFile: "Uploading {count} of {total} files...",
+                confirmDelete: "Are you sure you want to delete \"{name}\"?",
+                promptNewFolder: "Enter new folder name:",
+                actionMove: "Move \"{name}\". Select destination folder.",
+                actionCopy: "Copy \"{name}\". Select destination folder.",
+                loggedInAs: "Logged in as: {email}"
+            },
+            id: {
+                loginTitle: "Login",
+                emailLabel: "Alamat Email",
+                passwordLabel: "Password",
+                loginButton: "Masuk",
+                noAccount: "Belum punya akun?",
+                createAccountLink: "Buat akun",
+                signupTitle: "Buat Akun Baru",
+                firstNameLabel: "Nama Depan",
+                lastNameLabel: "Nama Belakang",
+                genderLabel: "Jenis Kelamin",
+                genderSelect: "Pilih...",
+                genderMale: "Pria",
+                genderFemale: "Wanita",
+                dobLabel: "Tgl. Lahir",
+                ageRequirement: "Saya sudah memenuhi syarat 18+",
+                signupButton: "Daftar",
+                haveAccount: "Sudah punya akun?",
+                loginLink: "Login",
+                mainTitle: "Pusat Berkas",
+                logoutButton: "Logout",
+                upButton: "Naik",
+                createFolderButton: "Buat Folder",
+                uploadButton: "Unggah File",
+                searchPlaceholder: "Cari file...",
+                pathLabel: "Path:",
+                loadingText: "Memuat...",
+                emptyFolderText: "Folder ini kosong.",
+                ctxOpen: "Buka",
+                ctxCopy: "Salin ke...",
+                ctxMove: "Pindahkan ke...",
+                ctxDelete: "Hapus",
+                cancelButton: "Batal",
+                errorWrongPassword: "Email atau password salah.",
+                errorEmailInUse: "Email ini sudah terdaftar.",
+                errorWeakPassword: "Password terlalu lemah (minimal 6 karakter).",
+                errorGeneric: "Terjadi kesalahan. Coba lagi.",
+                uploadingFile: "Mengunggah {count} dari {total} file...",
+                confirmDelete: "Anda yakin ingin menghapus \"{name}\"?",
+                promptNewFolder: "Masukkan nama folder baru:",
+                actionMove: "Pindahkan \"{name}\". Pilih folder tujuan.",
+                actionCopy: "Salin \"{name}\". Pilih folder tujuan.",
+                loggedInAs: "Login sebagai: {email}"
+            }
+        };
+        let currentLanguage = localStorage.getItem('language') || 'id';
+
+        function setLanguage(lang) {
+            currentLanguage = lang;
+            localStorage.setItem('language', lang);
+            document.querySelectorAll('[data-translate-key]').forEach(el => {
+                const key = el.getAttribute('data-translate-key');
+                if (translations[lang][key]) {
+                    if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+                        el.placeholder = translations[lang][key];
+                    } else {
+                        el.textContent = translations[lang][key];
+                    }
+                }
+            });
+            // Update active button style
+            document.getElementById('lang-id').classList.toggle('active', lang === 'id');
+            document.getElementById('lang-en').classList.toggle('active', lang === 'en');
+        }
+
+        function t(key, replacements = {}) {
+            let text = translations[currentLanguage][key] || key;
+            for (const placeholder in replacements) {
+                text = text.replace(`{${placeholder}}`, replacements[placeholder]);
+            }
+            return text;
+        }
+
+        // --- APP STATE ---
         let currentPath = [];
         let localFiles = [], localFolders = [];
         let selectionMode = null, fileInOperation = null, searchQuery = '';
@@ -166,14 +333,12 @@
             searchInput: document.getElementById('search-input'),
         };
 
-        function getCurrentPathKey() { return currentPath.length > 0 ? currentPath.map(p => p.id).join('/') : 'root'; }
-        function getCurrentPathName() { return currentPath.length > 0 ? currentPath.map(p => p.name).join('/') : 'Root'; }
-
+        // --- AUTHENTICATION LOGIC ---
         onAuthStateChanged(auth, user => {
             if (user) {
                 dom.authPage.classList.add('hidden');
                 dom.explorerPage.classList.remove('hidden');
-                document.getElementById('user-email').textContent = `Login sebagai: ${user.email}`;
+                document.getElementById('user-email').textContent = t('loggedInAs', { email: user.email });
                 listenToData(user.uid);
             } else {
                 dom.authPage.classList.remove('hidden');
@@ -182,7 +347,47 @@
                 if (unsubFolders) unsubFolders();
             }
         });
+        
+        dom.loginForm.addEventListener('submit', e => { 
+            e.preventDefault(); 
+            const email = dom.loginForm.querySelector('#login-email').value; 
+            const password = dom.loginForm.querySelector('#login-password').value; 
+            document.getElementById('login-error').textContent = ""; 
+            signInWithEmailAndPassword(auth, email, password)
+                .catch(err => document.getElementById('login-error').textContent = t('errorWrongPassword')); 
+        });
 
+        dom.signupForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const email = dom.signupForm.querySelector('#signup-email').value;
+            const password = dom.signupForm.querySelector('#signup-password').value;
+            const firstName = dom.signupForm.querySelector('#signup-firstname').value;
+            const lastName = dom.signupForm.querySelector('#signup-lastname').value;
+            const gender = dom.signupForm.querySelector('#signup-gender').value;
+            const dob = dom.signupForm.querySelector('#signup-dob').value;
+            
+            const errorEl = document.getElementById('signup-error');
+            errorEl.textContent = "";
+
+            try {
+                const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+                const user = userCredential.user;
+                await setDoc(doc(db, "users", user.uid), {
+                    firstName, lastName, gender, dateOfBirth: dob, createdAt: new Date()
+                });
+            } catch (error) {
+                let msgKey = 'errorGeneric';
+                if (error.code === 'auth/email-already-in-use') msgKey = 'errorEmailInUse';
+                else if (error.code === 'auth/weak-password') msgKey = 'errorWeakPassword';
+                errorEl.textContent = t(msgKey);
+            }
+        });
+
+        dom.logoutButton.addEventListener('click', () => signOut(auth));
+        document.getElementById('show-signup').addEventListener('click', e => { e.preventDefault(); dom.loginForm.classList.add('hidden'); dom.signupForm.classList.remove('hidden'); });
+        document.getElementById('show-login').addEventListener('click', e => { e.preventDefault(); dom.signupForm.classList.add('hidden'); dom.loginForm.classList.remove('hidden'); });
+
+        // --- DATA & RENDERING LOGIC ---
         function listenToData(userId) {
             const filesRef = collection(db, "files");
             const foldersRef = collection(db, "folders");
@@ -222,19 +427,8 @@
                 filesToDisplay = localFiles.filter(f => f.path === pathKey);
             }
 
-            // Render Folders
-            foldersToDisplay.forEach(folder => {
-                contentExists = true;
-                const el = createFolderElement(folder);
-                fragment.appendChild(el);
-            });
-
-            // Render Files
-            filesToDisplay.forEach(file => {
-                contentExists = true;
-                const el = createFileElement(file);
-                fragment.appendChild(el);
-            });
+            foldersToDisplay.forEach(folder => { contentExists = true; fragment.appendChild(createFolderElement(folder)); });
+            filesToDisplay.forEach(file => { contentExists = true; fragment.appendChild(createFileElement(file)); });
             
             dom.fileList.appendChild(fragment);
             if (!contentExists) dom.emptyMessage.classList.remove('hidden');
@@ -245,7 +439,6 @@
             el.className = 'flex flex-col items-center justify-center p-3 bg-white dark:bg-gray-700/50 rounded-lg shadow-sm cursor-pointer hover:bg-yellow-100 dark:hover:bg-yellow-900/50 hover:shadow-md transition-all duration-200';
             el.addEventListener('click', () => handleFolderClick(folder));
             if(selectionMode) el.classList.add('folder-target-highlight');
-            
             const icon = `<svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-yellow-500 pointer-events-none" viewBox="0 0 20 20" fill="currentColor"><path d="M2 6a2 2 0 012-2h5l2 2h5a2 2 0 012 2v6a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" /></svg>`;
             const name = `<span class="mt-2 text-xs text-center text-gray-700 dark:text-gray-300 truncate w-full pointer-events-none">${folder.name}</span>`;
             el.innerHTML = icon + name;
@@ -256,57 +449,38 @@
             const el = document.createElement('div');
             el.className = 'flex flex-col items-center justify-center p-3 bg-white dark:bg-gray-700/50 rounded-lg shadow-sm cursor-pointer hover:bg-blue-100 dark:hover:bg-blue-900/50 hover:shadow-md transition-all duration-200';
             el.addEventListener('click', (e) => showContextMenu(e, file));
-            
             const icon = `<svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-gray-500 dark:text-gray-400 pointer-events-none" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4zm2 6a1 1 0 011-1h6a1 1 0 110 2H7a1 1 0 01-1-1zm1 3a1 1 0 100 2h6a1 1 0 100-2H7z" clip-rule="evenodd" /></svg>`;
             const name = `<span class="mt-2 text-xs text-center text-gray-700 dark:text-gray-300 truncate w-full pointer-events-none">${file.name}</span>`;
             el.innerHTML = icon + name;
             return el;
         }
 
+        // --- FILE & FOLDER ACTIONS ---
         async function createFolder() {
-            const folderName = prompt("Masukkan nama folder baru:");
+            const folderName = prompt(t('promptNewFolder'));
             if (!folderName || folderName.trim() === '') return;
-
             const user = auth.currentUser;
             if (!user) return;
-
             try {
-                await addDoc(collection(db, "folders"), {
-                    userId: user.uid,
-                    name: folderName.trim(),
-                    path: getCurrentPathKey()
-                });
-            } catch (error) {
-                console.error("Gagal membuat folder:", error);
-                alert("Gagal membuat folder.");
-            }
+                await addDoc(collection(db, "folders"), { userId: user.uid, name: folderName.trim(), path: getCurrentPathKey() });
+            } catch (error) { console.error("Gagal membuat folder:", error); alert(t('errorGeneric')); }
         }
 
         async function handleUpload(event) {
-            const files = event.target.files;
-            if (!files.length) return;
-            const user = auth.currentUser;
-            if (!user) return;
-
+            const files = event.target.files; if (!files.length) return;
+            const user = auth.currentUser; if (!user) return;
             dom.uploadProgress.classList.remove('hidden');
             for (let i = 0; i < files.length; i++) {
                 const file = files[i];
-                document.getElementById('upload-progress-text').textContent = `Mengunggah ${i + 1} dari ${files.length} file...`;
+                document.getElementById('upload-progress-text').textContent = t('uploadingFile', {count: i+1, total: files.length});
                 const pathKey = getCurrentPathKey();
                 const storagePath = `files/${user.uid}/${Date.now()}-${file.name}`;
                 const storageRef = ref(storage, storagePath);
-
                 try {
                     await uploadBytes(storageRef, file);
                     const downloadURL = await getDownloadURL(storageRef);
-                    await addDoc(collection(db, "files"), {
-                        userId: user.uid, name: file.name, url: downloadURL,
-                        path: pathKey, storagePath: storagePath
-                    });
-                } catch (error) {
-                    console.error("Gagal mengunggah file:", error);
-                    alert(`Gagal mengunggah ${file.name}.`);
-                }
+                    await addDoc(collection(db, "files"), { userId: user.uid, name: file.name, url: downloadURL, path: pathKey, storagePath: storagePath });
+                } catch (error) { console.error("Gagal mengunggah file:", error); alert(t('errorGeneric')); }
             }
             dom.uploadProgress.classList.add('hidden');
             dom.fileInput.value = null;
@@ -314,35 +488,20 @@
         
         async function deleteItem(item) {
             const isFolder = !item.url;
-             if (!confirm(`Anda yakin ingin menghapus ${isFolder ? 'folder' : 'file'} "${item.name}"?`)) {
-                hideContextMenu();
-                return;
-            }
+            if (!confirm(t('confirmDelete', {name: item.name}))) { hideContextMenu(); return; }
             try {
-                if (isFolder) {
-                    // Peringatan: Menghapus folder tidak akan menghapus file di dalamnya.
-                    // Logika penghapusan rekursif diperlukan untuk itu.
-                    await deleteDoc(doc(db, "folders", item.id));
-                } else {
-                    await deleteDoc(doc(db, "files", item.id));
-                    const storageRef = ref(storage, item.storagePath);
-                    await deleteObject(storageRef);
-                }
-            } catch (error) {
-                console.error("Gagal menghapus:", error);
-                alert("Gagal menghapus.");
-            }
+                if (isFolder) { await deleteDoc(doc(db, "folders", item.id)); } 
+                else { await deleteDoc(doc(db, "files", item.id)); const storageRef = ref(storage, item.storagePath); await deleteObject(storageRef); }
+            } catch (error) { console.error("Gagal menghapus:", error); alert(t('errorGeneric')); }
             hideContextMenu();
         }
 
         function startAction(mode, file) {
-            selectionMode = mode;
-            fileInOperation = file;
-            const actionText = mode === 'move' ? 'Pindahkan' : 'Salin';
-            document.getElementById('action-banner-text').textContent = `${actionText} "${file.name}". Pilih folder tujuan.`;
+            selectionMode = mode; fileInOperation = file;
+            const actionKey = mode === 'move' ? 'actionMove' : 'actionCopy';
+            document.getElementById('action-banner-text').textContent = t(actionKey, {name: file.name});
             dom.actionBanner.classList.remove('hidden');
-            renderContent();
-            hideContextMenu();
+            renderContent(); hideContextMenu();
         }
 
         async function handleFolderClick(folder) {
@@ -354,50 +513,27 @@
                         await updateDoc(fileDocRef, { path: destinationPathKey });
                     } else if (selectionMode === 'copy') {
                         const user = auth.currentUser;
-                        const { id, ...fileData } = fileInOperation; // Salin data tanpa ID lama
-                        await addDoc(collection(db, "files"), {
-                            ...fileData,
-                            path: destinationPathKey,
-                            userId: user.uid
-                        });
+                        const { id, ...fileData } = fileInOperation;
+                        await addDoc(collection(db, "files"), { ...fileData, path: destinationPathKey, userId: user.uid });
                     }
-                } catch (error) {
-                    console.error(`Gagal ${selectionMode} file:`, error);
-                    alert(`Gagal ${selectionMode} file.`);
-                }
+                } catch (error) { console.error(`Gagal ${selectionMode} file:`, error); alert(t('errorGeneric')); }
                 cancelAction();
             } else {
                 navigateTo(folder);
             }
         }
         
-        function navigateTo(folder) {
-            currentPath.push({id: folder.id, name: folder.name});
-            renderContent();
-        }
-        
-        function navigateUp() {
-            if (searchQuery) {
-                dom.searchInput.value = '';
-                searchQuery = '';
-                renderContent();
-            } else if (currentPath.length > 0) {
-                currentPath.pop();
-                renderContent();
-            }
-        }
-
-        // --- Event Listeners & Init ---
-        dom.loginForm.addEventListener('submit', e => { e.preventDefault(); const email = dom.loginForm.email.value; const password = dom.loginForm.password.value; document.getElementById('login-error').textContent = ""; signInWithEmailAndPassword(auth, email, password).catch(err => document.getElementById('login-error').textContent = "Email atau password salah."); });
-        dom.signupForm.addEventListener('submit', e => { e.preventDefault(); const email = dom.signupForm.email.value; const password = dom.signupForm.password.value; document.getElementById('signup-error').textContent = ""; createUserWithEmailAndPassword(auth, email, password).catch(err => { let msg = "Terjadi kesalahan."; if (err.code === 'auth/email-already-in-use') msg = "Email ini sudah terdaftar."; else if (err.code === 'auth/weak-password') msg = "Password terlalu lemah."; document.getElementById('signup-error').textContent = msg; }); });
-        dom.logoutButton.addEventListener('click', () => signOut(auth));
-        document.getElementById('show-signup').addEventListener('click', e => { e.preventDefault(); dom.loginForm.classList.add('hidden'); dom.signupForm.classList.remove('hidden'); });
-        document.getElementById('show-login').addEventListener('click', e => { e.preventDefault(); dom.signupForm.classList.add('hidden'); dom.loginForm.classList.remove('hidden'); });
+        // --- NAVIGATION & UI HELPERS ---
+        function getCurrentPathKey() { return currentPath.length > 0 ? currentPath.map(p => p.id).join('/') : 'root'; }
+        function navigateTo(folder) { currentPath.push({id: folder.id, name: folder.name}); renderContent(); }
+        function navigateUp() { if (searchQuery) { dom.searchInput.value = ''; searchQuery = ''; renderContent(); } else if (currentPath.length > 0) { currentPath.pop(); renderContent(); } }
         function updateBreadcrumbs() { dom.breadcrumbs.innerHTML = ''; const rootLink = document.createElement('a'); rootLink.href = '#'; rootLink.textContent = 'Root'; rootLink.className = 'hover:underline cursor-pointer'; rootLink.addEventListener('click', e => { e.preventDefault(); navigateBreadcrumb(0); }); dom.breadcrumbs.appendChild(rootLink); currentPath.forEach((folder, level) => { dom.breadcrumbs.innerHTML += `<span class="mx-2">/</span>`; const pathLink = document.createElement('a'); pathLink.href = '#'; pathLink.textContent = folder.name; pathLink.className = 'hover:underline cursor-pointer'; pathLink.addEventListener('click', e => { e.preventDefault(); navigateBreadcrumb(level + 1); }); dom.breadcrumbs.appendChild(pathLink); }); }
         function showContextMenu(event, item) { event.stopPropagation(); dom.contextMenu.style.left = `${event.pageX}px`; dom.contextMenu.style.top = `${event.pageY}px`; dom.contextMenu.classList.remove('hidden'); setTimeout(() => dom.contextMenu.classList.remove('opacity-0'), 10); const isFolder = !item.url; document.getElementById('ctx-open').style.display = isFolder ? 'none' : 'block'; document.getElementById('ctx-copy').style.display = isFolder ? 'none' : 'block'; document.getElementById('ctx-move').style.display = isFolder ? 'none' : 'block'; document.getElementById('ctx-open').href = item.url || '#'; document.getElementById('ctx-copy').onclick = () => startAction('copy', item); document.getElementById('ctx-move').onclick = () => startAction('move', item); document.getElementById('ctx-delete').onclick = () => deleteItem(item); }
         function hideContextMenu() { dom.contextMenu.classList.add('opacity-0'); setTimeout(() => dom.contextMenu.classList.add('hidden'), 100); }
         function cancelAction() { selectionMode = null; fileInOperation = null; dom.actionBanner.classList.add('hidden'); renderContent(); }
         function navigateBreadcrumb(level) { if (selectionMode) return; currentPath = currentPath.slice(0, level); renderContent(); }
+        
+        // --- EVENT LISTENERS & INIT ---
         dom.upButton.addEventListener('click', navigateUp);
         dom.uploadButton.addEventListener('click', () => dom.fileInput.click());
         dom.createFolderButton.addEventListener('click', createFolder);
@@ -406,6 +542,11 @@
         document.getElementById('cancel-action-btn').addEventListener('click', cancelAction);
         document.addEventListener('click', hideContextMenu);
         dom.contextMenu.addEventListener('click', e => e.stopPropagation());
+        document.getElementById('lang-id').addEventListener('click', () => setLanguage('id'));
+        document.getElementById('lang-en').addEventListener('click', () => setLanguage('en'));
+
+        // Apply initial language
+        setLanguage(currentLanguage);
     </script>
 </body>
 </html>
